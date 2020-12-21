@@ -1,6 +1,6 @@
 importClass(android.database.sqlite.SQLiteDatabase);
 var lCount = 1;//挑战答题轮数
-var qCount = 5;//挑战答题每轮答题数
+var qCount = 50;//挑战答题每轮答题数
 
 /**
  * @description: 延时函数
