@@ -1,1 +1,1 @@
-toast('Hello, Auto.js');
+engines.execScriptFile("floating.js");
