@@ -1,5 +1,5 @@
 importClass(android.database.sqlite.SQLiteDatabase);
-var lCount = 1;//挑战答题轮数
+var lCount = 2;//挑战答题轮数，第三次手答
 var qCount = 50;//挑战答题每轮答题数
 
 /**
@@ -64,20 +64,20 @@ function indexFromChar(str) {
 function challengeQuestionLoop(conNum) {
     if (conNum >= qCount)//答题次数足够退出，每轮5次
     {
-        let listArray = className("ListView").findOnce().children();//题目选项列表
+        let listArray = className("android.view.View").text("确认答案").parent().children(1);//题目选项列表
         let i = random(0, listArray.length - 1);
         console.log("今天答题次数已够，随机点击一个答案");
         listArray[i].child(0).click();//随意点击一个答案
         console.log("------------");
         return;
     }
-    if (className("ListView").exists()) {
-        var question = className("ListView").findOnce().parent().child(0).text();
+    if (className("android.view.View").text("确认答案").exists()) {
+        var question = className("android.view.View").text("确认答案").parent().children(1).child(0).text();
         console.log((conNum + 1).toString() + ".题目：" + question);
     }
     else {
         console.error("提取题目失败!");
-        let listArray = className("ListView").findOnce().children();//题目选项列表
+        let listArray = className("android.view.View").findOnce().children();//题目选项列表
         let i = random(0, listArray.length - 1);
         console.log("随机点击一个");
         listArray[i].child(0).click();//随意点击一个答案
@@ -92,8 +92,8 @@ function challengeQuestionLoop(conNum) {
     question = question.replace(/\s/g, "");
 
     var options = [];//选项列表
-    if (className("ListView").exists()) {
-        className("ListView").findOne().children().forEach(child => {
+    if (className("android.view.View").exists()) {
+        className("android.view.View").findOne().children().forEach(child => {
             var answer_q = child.child(0).child(1).text();
             options.push(answer_q);
         });
@@ -116,7 +116,7 @@ function challengeQuestionLoop(conNum) {
     }
 
     let hasClicked = false;
-    let listArray = className("ListView").findOnce().children();//题目选项列表
+    let listArray = className("android.view.View").text("确认答案").parent().children(1);//题目选项列表
     if (answer == "")//如果没找到答案
     {
         let i = random(0, listArray.length - 1);
@@ -179,7 +179,7 @@ function challengeQuestion() {
     let lNum = 0;//轮数
     while (true) {
         delay(2);
-        if (!className("RadioButton").exists()) {
+        if (!className("android.view.View").text("确认答案").exists()) {
             toastLog("没有找到题目！请检查是否进入答题界面！");
             console.error("没有找到题目！请检查是否进入答题界面！");
             console.log("停止");
@@ -187,8 +187,7 @@ function challengeQuestion() {
         }
         challengeQuestionLoop(conNum);
         delay(1);
-        if (text("v5IOXn6lQWYTJeqX2eHuNcrPesmSud2JdogYyGnRNxujMT8RS7y43zxY4coWepspQkvw" +
-            "RDTJtCTsZ5JW+8sGvTRDzFnDeO+BcOEpP0Rte6f+HwcGxeN2dglWfgH8P0C7HkCMJOAAAAAElFTkSuQmCC").exists())//遇到❌号，则答错了,不再通过结束本局字样判断
+        if (text("确认答案").exists())//遇到❌号，则答错了,不再通过结束本局字样判断
         {
             if (conNum >= qCount) {
                 lNum++;
