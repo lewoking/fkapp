@@ -152,7 +152,7 @@ function start_app() {
 
 function main() {
     start_app();//启动app
-    today = getTodayDateString() ；
+    today = getTodayDateString();
     console.info(today);
     dayover(); // 完工
     release(); //发布
