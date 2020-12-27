@@ -30,7 +30,6 @@ function delay(seconds) {
  * @return: null
  */
 function release(n, today) {
-    seconds = seconds + randomNum(0, 10)
     h = device.height;//屏幕高
     w = device.width;//屏幕宽
     x = (w / 3) * 2;
@@ -155,6 +154,7 @@ function main() {
     today = getTodayDateString();
     console.info(today);
     dayover(); // 完工
+    console.info("已完工");
     release(); //发布
     console.warn("自动备份已学文章列表到/sdcard/Download!!!");
     console.hide();
