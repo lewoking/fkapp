@@ -12,6 +12,7 @@ x3 = w / 27 * 17 //第三列680
 h1 = h / 114 * 23;  //第一行460
 h2 = h / 228 * 65;//  第二行650
 h3 = h / 19 * 18;//底部首页2165
+y1 = h / 19 * 11; //1310 待办1
 msg = 0;//默认为时间触发 今明联动    tasker中可设置短信触发及激活取消时间触发项
 /********************************************全局变量***********************************************/
 
@@ -21,7 +22,7 @@ msg = 0;//默认为时间触发 今明联动    tasker中可设置短信触发�
  * @return: null
  */
 function delay(seconds) {
-    sleep(1000 * seconds);//sleep函数参数单位为毫秒所以乘1000
+    sleep(1000 * seconds + random(100, 2000));//sleep函数参数单位为毫秒所以乘1000
 }
 
 /**
@@ -30,32 +31,70 @@ function delay(seconds) {
  * @return: null
  */
 function release(n, today) {
-    h = device.height;//屏幕高
-    w = device.width;//屏幕宽
-    x = (w / 3) * 2;
-    h1 = (h / 6) * 5;
-    h2 = (h / 6);
-    for (var i = 0; i < seconds; i++) {
-        while (!textContains("欢迎发表你的观点").exists())//如果离开了文章界面则一直等待
-        {
-            console.error("当前已离开第" + (n + 1) + "文章界面，请重新返回文章页面...");
-            delay(2);
-        }
-        if (i % 5 == 0)//每5秒打印一次学习情况
-        {
-            console.info("第" + (n + 1) + "篇文章已经学习" + (i + 1) + "秒,剩余" + (seconds - i - 1) + "秒!");
-        }
-        sleep(1000);
-        if (i % 10 == 0)//每10秒滑动一次，如果android版本<7.0请将此滑动代码删除
-        {
-            toast("这是防息屏toast,请忽视-。-");
-            if (i <= seconds / 2) {
-                swipe(x, h1, x, h2, 500);//向下滑动
+    delay(1);
+    x4 = w / 18 * 13;// 780
+    y2 = h / 57 * 8;// 320
+    while (textContains("我的工作").findone);
+    click(x3, h3);// 我的工作
+    delay(2);
+    while (textContains("我的待办").findone);
+    click(x1, y1); //计划管理
+    delay(2);
+    while (textContains("待发布").findone);
+    click(x4, y2);// 待发布
+    delay(2);
+    if (!text("计划详情").exists()) {
+        back(); //退出
+    } else {
+        delay(0);
+        swipe(x3, h3, x3, y2, 500);//向下滑动1
+        delay(0);
+        swipe(x3, h3, x3, y1, 500);//向下滑动,0.5
+        delay(0);
+        lb = text("工作票类别").findOne().parent().bounds();
+        console.log(lb);
+        if (textContains("机房").exists()) {
+            if (click(lb.centerX(), lb.centerY())) {
+                delay(1);
+                jk = text("监控工作票").findOne().bounds();
+                console.log(jk);
+                if (click(jk.centerX(), jk.centerY())) {
+                    delay(1);
+                    lx = text("工作票类型").findOne().parent().bounds();
+                    if (click(lx.centerX(), lx.centerY())) {
+                        delay(1);
+                        jkp = text("电力监控工作票").findOne().bounds();
+                        click(jkp.centerX(), jkp.centerY());
+                    }
+                };
             }
-            else {
-                swipe(x, h2, x, h1, 500);//向上滑动
+        } else {
+            if (click(lb.centerX(), lb.centerY())) {
+                delay(1);
+                bd = text("变电工作票").findOne().bounds();
+                console.log(bd);
+                if (click(bd.centerX(), bd.centerY())) {
+                    delay(1);
+                    lx = text("工作票类型").findOne().parent().bounds();
+                    if (click(lx.centerX(), lx.centerY())) {
+                        delay(1);
+                        bdp = text("变电站（发电厂）第二种工作票").findOne().bounds();
+                        click(bdp.centerX(), bdp.centerY());
+                    }
+                };
             }
         }
+        delay(0);
+        swipe(x3, h3, x3, y2, 500);
+        delay(0);
+        swipe(x3, h3, x3, y2, 500);
+        delay(0);
+        swipe(x3, h3, x3, y2, 500);
+        delay(0);
+        sub = id("subBtn").findOne().bounds();
+        click(sub.centerX(), sub.centerY());//提交按钮 
+        back(); 返回主页
+        click(x1, h3);
     }
 }
 
@@ -65,8 +104,8 @@ function release(n, today) {
  * @return: null
  */
 function dayover() {
-    // seconds = seconds + randomNum(0, 10)
-    while (!textContains("我的工作").exists());
+    while (textContains("我的工作").findone);
+    delay(1);
     click(x1, h1);
     id("nav-left2").waitFor(); //返回按钮
     sleep(3000);
@@ -134,7 +173,7 @@ function getTodayDateString() {
  */
 function start_app() {
     console.setPosition(0, device.height / 2);//部分华为手机console有bug请注释本行
-    console.show();//部分华为手机console有bug请注释本行
+    // console.show();//部分华为手机console有bug请注释本行
     console.log("正在启动app...");
     if (!launchApp("安管2.0"))//启动安管2.0app
     {
