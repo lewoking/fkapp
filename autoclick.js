@@ -197,6 +197,8 @@ function main() {
     release(); //发布
     console.warn("自动备份已学文章列表到/sdcard/Download!!!");
     console.hide();
+    toastLog(" 退出！");
+    exit();
 }
 
 module.exports = main;

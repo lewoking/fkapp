@@ -226,6 +226,8 @@ function main() {
     delay(1);
     challengeQuestion();
     console.hide()
+    toastLog(" 退出！");
+    exit();
 }
 
 module.exports = main;
