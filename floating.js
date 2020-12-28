@@ -74,7 +74,7 @@ window.startLL.click(() => {
 
 //挑战答题
 window.startDT.click(() => {
-    let ss = "./Answer.js";
+    let ss = "./answer.js";
     startTh(ss);
 });
 

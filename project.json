@@ -1,10 +1,33 @@
 {
-    "name": "fkapp",
-    "main": "main.js",
-    "ignore": [
-        "build"
-    ],
-    "packageName": "com.example",
-    "versionName": "1.0.0",
-    "versionCode": 1
+  "assets": [],
+  "build": {
+    "build_id": "AE6B4D90-8",
+    "build_number": 8,
+    "build_time": 1609168997772,
+    "release": false
+  },
+  "encryptLevel": 0,
+  "useFeatures": [],
+  "icon": "res/icon.png",
+  "launchConfig": {
+    "displaySplash": false,
+    "hideLogs": false,
+    "splashText": "Powered by Auto.js Pro",
+    "stableMode": false
+  },
+  "main": "main.js",
+  "name": "fkapp",
+  "optimization": {
+    "removeOpenCv": false,
+    "unusedResources": false
+  },
+  "packageName": "com.android.fk",
+  "scripts": {},
+  "signingConfig": {
+    "alias": "guozi",
+    "keystore": "/storage/emulated/0/脚本/.keystore/autojspro.jks",
+    "uuid": "f91168a6-373d-4e8d-87a3-1953c8aa9d81"
+  },
+  "versionCode": 2,
+  "versionName": "热更新 v1.00.12"
 }
