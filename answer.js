@@ -223,6 +223,11 @@ function challengeQuestion() {
 function main() {
     console.setPosition(0, device.height / 2);//部分华为手机console有bug请注释本行
     console.show();
+    if (!launchApp("安管2.0"))//启动学习强国app
+    {
+        console.error("找不到安管App!");
+        return;
+    }
     delay(1);
     challengeQuestion();
     console.hide()

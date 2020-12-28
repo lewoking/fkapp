@@ -4,9 +4,9 @@ auto.waitFor();
 let window = floaty.window(
     <vertical>
         <button id="move" text=" 移动 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
-        <button id="switchXX" text=" 切到 分控 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
+        {/* <button id="switchXX" text=" 切到 分控 " w="90" h="35" bg="#77ffffff" textSize="10sp" /> */}
         <button id="startLL" text=" 一键 发布 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
-        <button id="startDT" text=" 每周答题 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
+        <button id="startDT" text=" 每周 答题 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
         <button id="stop" text=" 停止 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
         <button id="exit" text=" 退出悬浮窗 " w="90" h="35" bg="#77ffffff" textSize="10sp" />
     </vertical>
@@ -46,14 +46,14 @@ window.move.setOnTouchListener(function (view, event) {
     return true;
 });
 
-window.switchXX.click(() => {
-    toastLog(" 切换到安管APP...");
-    if (!launchApp("安管2.0"))//启动学习强国app
-    {
-        console.error("找不到安管App!");
-        return;
-    }
-});
+// window.switchXX.click(() => {
+//     toastLog(" 切换到安管APP...");
+//     if (!launchApp("安管2.0"))//启动学习强国app
+//     {
+//         console.error("找不到安管App!");
+//         return;
+//     }
+// });
 
 
 
