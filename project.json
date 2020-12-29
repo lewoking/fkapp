@@ -1,9 +1,9 @@
 {
   "assets": [],
   "build": {
-    "build_id": "AE6B4D90-8",
-    "build_number": 8,
-    "build_time": 1609168997772,
+    "build_id": "435D7004-9",
+    "build_number": 9,
+    "build_time": 1609215710518,
     "release": false
   },
   "encryptLevel": 0,
@@ -26,8 +26,8 @@
   "signingConfig": {
     "alias": "guozi",
     "keystore": "/storage/emulated/0/脚本/.keystore/autojspro.jks",
-    "uuid": "f91168a6-373d-4e8d-87a3-1953c8aa9d81"
+    "uuid": "845a8dfd-5d4e-41a7-a3e4-3b8613fdf8c0"
   },
-  "versionCode": 2,
+  "versionCode": 3,
   "versionName": "热更新 v1.00.12"
 }
