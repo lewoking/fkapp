@@ -66,7 +66,7 @@ function release(n, today) {
                         jkp = text("电力监控工作票").findOne().bounds();
                         click(jkp.centerX(), jkp.centerY());
                     }
-                };
+                }
             }
         } else {
             if (click(lb.centerX(), lb.centerY())) {
@@ -81,7 +81,7 @@ function release(n, today) {
                         bdp = text("变电站（发电厂）第二种工作票").findOne().bounds();
                         click(bdp.centerX(), bdp.centerY());
                     }
-                };
+                }
             }
         }
         delay(0);
@@ -93,7 +93,7 @@ function release(n, today) {
         delay(0);
         sub = id("subBtn").findOne().bounds();
         click(sub.centerX(), sub.centerY());//提交按钮 
-        back(); 返回主页
+        back(); //返回主页
         click(x1, h3);
     }
 }
@@ -104,7 +104,7 @@ function release(n, today) {
  * @return: null
  */
 function dayover() {
-    while (!textContains("我的工作").findone);
+    while (textContains("我的工作").findone);
     delay(1);
     click(x1, h1);
     id("nav-left2").waitFor(); //返回按钮
