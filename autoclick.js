@@ -27,10 +27,10 @@ function delay(seconds) {
 
 /**
  * @description: 短信触发计划发布
- * @param: n-计划编号 today-日期
+ * @param: n-计划编号 tomorrow-日期
  * @return: null
  */
-function release(n, today) {
+function release(tomorrow) {
     delay(1);
     x4 = w / 18 * 13;// 780
     y2 = h / 57 * 8;// 320
@@ -42,57 +42,62 @@ function release(n, today) {
     delay(2);
     while (textContains("待发布").findone);
     click(x4, y2);// 待发布
-    delay(2);
-    if (!text("计划详情").exists()) {
-        back(); //退出
-    } else {
-        delay(0);
-        swipe(x3, h3, x3, y2, 500);//向下滑动1
-        delay(0);
-        swipe(x3, h3, x3, y1, 500);//向下滑动,0.5
-        delay(0);
-        lb = text("工作票类别").findOne().parent().bounds();
-        console.log(lb);
-        if (textContains("机房").exists()) {
-            if (click(lb.centerX(), lb.centerY())) {
-                delay(1);
-                jk = text("监控工作票").findOne().bounds();
-                console.log(jk);
-                if (click(jk.centerX(), jk.centerY())) {
-                    delay(1);
-                    lx = text("工作票类型").findOne().parent().bounds();
-                    if (click(lx.centerX(), lx.centerY())) {
-                        delay(1);
-                        jkp = text("电力监控工作票").findOne().bounds();
-                        click(jkp.centerX(), jkp.centerY());
-                    }
-                }
-            }
+    delay(3);
+    if (id("gqBtn").exists()) {
+        tom = textContains(tomorrow).findOne().parent().bounds();
+        click(tom.centerX(), tom.centerY());// click(x3, h2); //工作内容
+        delay(2);
+        if (!text("计划详情").exists()) {
+            back(); //退出
         } else {
-            if (click(lb.centerX(), lb.centerY())) {
-                delay(1);
-                bd = text("变电工作票").findOne().bounds();
-                console.log(bd);
-                if (click(bd.centerX(), bd.centerY())) {
+            delay(0);
+            swipe(x3, h3, x3, y2, 500);//向下滑动1
+            delay(0);
+            swipe(x3, h3, x3, y1, 500);//向下滑动,0.5
+            delay(0);
+            lb = text("工作票类别").findOne().parent().bounds();
+            console.log(lb);
+            if (textContains("机房").exists()) {
+                if (click(lb.centerX(), lb.centerY())) {
                     delay(1);
-                    lx = text("工作票类型").findOne().parent().bounds();
-                    if (click(lx.centerX(), lx.centerY())) {
+                    jk = text("监控工作票").findOne().bounds();
+                    console.log(jk);
+                    if (click(jk.centerX(), jk.centerY())) {
                         delay(1);
-                        bdp = text("变电站（发电厂）第二种工作票").findOne().bounds();
-                        click(bdp.centerX(), bdp.centerY());
+                        lx = text("工作票类型").findOne().parent().bounds();
+                        if (click(lx.centerX(), lx.centerY())) {
+                            delay(1);
+                            jkp = text("电力监控工作票").findOne().bounds();
+                            click(jkp.centerX(), jkp.centerY());
+                        }
+                    }
+                }
+            } else {
+                if (click(lb.centerX(), lb.centerY())) {
+                    delay(1);
+                    bd = text("变电工作票").findOne().bounds();
+                    console.log(bd);
+                    if (click(bd.centerX(), bd.centerY())) {
+                        delay(1);
+                        lx = text("工作票类型").findOne().parent().bounds();
+                        if (click(lx.centerX(), lx.centerY())) {
+                            delay(1);
+                            bdp = text("变电站（发电厂）第二种工作票").findOne().bounds();
+                            click(bdp.centerX(), bdp.centerY());
+                        }
                     }
                 }
             }
+            delay(0);
+            swipe(x3, h3, x3, y2, 500);
+            delay(0);
+            swipe(x3, h3, x3, y2, 500);
+            delay(0);
+            swipe(x3, h3, x3, y2, 500);
+            delay(0);
+            sub = id("subBtn").findOne().bounds();
+            click(sub.centerX(), sub.centerY());//提交按钮 
         }
-        delay(0);
-        swipe(x3, h3, x3, y2, 500);
-        delay(0);
-        swipe(x3, h3, x3, y2, 500);
-        delay(0);
-        swipe(x3, h3, x3, y2, 500);
-        delay(0);
-        sub = id("subBtn").findOne().bounds();
-        click(sub.centerX(), sub.centerY());//提交按钮 
         back(); //返回主页
         click(x1, h3);
     }
@@ -169,6 +174,20 @@ function getTodayDateString() {
     var s = dateToString(y, m, d);//年-月-日
     return s
 }
+/**
+ * @description: 获取明日日期字符串函数
+ * @param: null
+ * @return: s 日期字符串 "2019-xx-xx"
+ */
+function gettomorrowDateString() {
+    var date = new Date();
+    date.setDate(date.getDate() + 1);
+    var y = date.getFullYear();
+    var m = date.getMonth();
+    var d = date.getDate();
+    var s = dateToString(y, m, d);//年-月-日
+    return s
+}
 
 
 /**
@@ -196,6 +215,7 @@ function start_app() {
 function main() {
     start_app();//启动app
     today = getTodayDateString();
+    tomorrow = gettomorrowDateString();
     console.info(today);
     dayover(); // 完工
     console.info("准备发布");
