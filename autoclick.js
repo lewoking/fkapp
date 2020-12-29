@@ -104,7 +104,7 @@ function release(n, today) {
  * @return: null
  */
 function dayover() {
-    while (textContains("我的工作").findone);
+    while (!textContains("我的工作").findone);
     delay(1);
     click(x1, h1);
     id("nav-left2").waitFor(); //返回按钮
@@ -112,11 +112,12 @@ function dayover() {
     if (className("android.view.View").text("暂无数据").exists()) {
         console.log("今日无工作")
     } else {
-        wg= className("android.view.View").text("完工").findOne().bounds();
-        console.log("执行完工操作") ; //补充完工步骤
-        click(wg.centerX(), wg.centerY());//
+        wg = className("android.view.View").text("完工").findOne().bounds();
+        console.log("即将执行完工操作"); //补充完工步骤
+        click(wg.centerX(), wg.centerY());//点击完工
         delay(1);
-        // click;
+        id("button2").findOne().click();//点击确定
+        delay(0);
     };
     if (id("nav-left2").exists()) {
         back();  //返回主页
