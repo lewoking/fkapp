@@ -112,7 +112,11 @@ function dayover() {
     if (className("android.view.View").text("暂无数据").exists()) {
         console.log("今日无工作")
     } else {
-        console.log("执行完工操作")  //补充完工步骤
+        wg= className("android.view.View").text("完工").findOne().bounds();
+        console.log("执行完工操作") ; //补充完工步骤
+        click(wg.centerX(), wg.centerY());//
+        delay(1);
+        // click;
     };
     if (id("nav-left2").exists()) {
         back();  //返回主页
@@ -193,7 +197,7 @@ function main() {
     today = getTodayDateString();
     console.info(today);
     dayover(); // 完工
-    console.info("已完工");
+    console.info("准备发布");
     release(); //发布
     console.warn("自动备份已学文章列表到/sdcard/Download!!!");
     console.hide();
