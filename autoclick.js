@@ -1,4 +1,4 @@
-/**
+toastLog/**
  * @Description: Auto.js fkapp https://github.com/lewoking/fkapp
  * @version: 1.0.0
  * @Author: lewoking
@@ -42,12 +42,21 @@ function release(tomorrow) {
     delay(2);
     while (textContains("待发布").findone);
     click(x4, y2);// 待发布
-    delay(3);
-    if (id("gqBtn").exists()) {
+    delay(7);
+    while(!text("没有更多数据了").exists()){
+        delay(2);
+       toastLog("等待数据");
+       
+        }
+        toastLog("load");
+    if (text("改期").findOne()) {
+        toastLog("find task");
+        delay(2);
         tom = textContains(tomorrow).findOne().parent().bounds();
         click(tom.centerX(), tom.centerY());// click(x3, h2); //工作内容
         delay(2);
         if (!text("计划详情").exists()) {
+            toastLog("null");
             back(); //退出
         } else {
             delay(0);
@@ -98,6 +107,7 @@ function release(tomorrow) {
             sub = id("subBtn").findOne().bounds();
             click(sub.centerX(), sub.centerY());//提交按钮 
         }
+        toastLog("task end");
         back(); //返回主页
         click(x1, h3);
     }
@@ -112,18 +122,22 @@ function dayover() {
     while (textContains("我的工作").findone);
     delay(1);
     click(x1, h1);
-    id("nav-left2").waitFor(); //返回按钮
-    sleep(3000);
-    if (className("android.view.View").text("暂无数据").exists()) {
-        console.log("今日无工作")
-    } else {
+    textContains("作业计划数").waitFor; //计划数加载完成
+    delay(9);
+    toastLog("查看计划");
+    if (className("android.view.View").text("完工").findOne(3000)) {
         wg = className("android.view.View").text("完工").findOne().bounds();
-        console.log("即将执行完工操作"); //补充完工步骤
+        toastLog("即将执行完工操作"); //补充完工步骤
         click(wg.centerX(), wg.centerY());//点击完工
         delay(1);
         id("button2").findOne().click();//点击确定
         delay(0);
-    };
+    }     else{  
+    
+     toastLog("今日无工作");
+     delay(2);
+     }
+    
     if (id("nav-left2").exists()) {
         back();  //返回主页
     }
@@ -198,14 +212,14 @@ function gettomorrowDateString() {
 function start_app() {
     console.setPosition(0, device.height / 2);//部分华为手机console有bug请注释本行
     // console.show();//部分华为手机console有bug请注释本行
-    console.log("正在启动app...");
+    toastLog("正在启动app...");
     if (!launchApp("安管2.0"))//启动安管2.0app
     {
         console.error("找不到安管2.0App!");
         return;
     }
     while (!textContains("我的工作").exists()) {
-        console.log("正在等待加载出主页");
+        toastLog("正在等待加载出主页");
         delay(1);
     }
     delay(1);
@@ -216,9 +230,9 @@ function main() {
     start_app();//启动app
     today = getTodayDateString();
     tomorrow = gettomorrowDateString();
-    console.info(today);
+    toastLog(today);
     dayover(); // 完工
-    console.info("准备发布");
+    toastLog("准备发布"+tomorrow);
     release(); //发布
     console.warn("自动备份已学文章列表到/sdcard/Download!!!");
     console.hide();
