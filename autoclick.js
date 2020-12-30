@@ -43,12 +43,12 @@ function release(tomorrow) {
     while (textContains("待发布").findone);
     click(x4, y2);// 待发布
     delay(7);
-    while(!text("没有更多数据了").exists()){
+    while (!text("没有更多数据了").exists()) {
         delay(2);
-       toastLog("等待数据");
-       
-        }
-        toastLog("load");
+        toastLog("等待数据");
+
+    }
+    toastLog("load");
     if (text("改期").findOne()) {
         toastLog("find task");
         delay(2);
@@ -66,7 +66,7 @@ function release(tomorrow) {
             delay(0);
             lb = text("工作票类别").findOne().parent().bounds();
             console.log(lb);
-            if (textContains("机房").exists()) {
+            if (textContains("机房").exists() || textContains("县调").exists() || textContains("备调").exists()) {
                 if (click(lb.centerX(), lb.centerY())) {
                     delay(1);
                     jk = text("监控工作票").findOne().bounds();
@@ -132,12 +132,10 @@ function dayover() {
         delay(1);
         id("button2").findOne().click();//点击确定
         delay(0);
-    }     else{  
-    
-     toastLog("今日无工作");
-     delay(2);
-     }
-    
+    } else {
+        toastLog("今日未开工");
+        delay(2);
+    }
     if (id("nav-left2").exists()) {
         back();  //返回主页
     }
@@ -219,8 +217,8 @@ function start_app() {
         return;
     }
     while (!textContains("我的工作").exists()) {
-        toastLog("正在等待加载出主页");
         delay(1);
+        toastLog("正在等待加载出主页");
     }
     delay(1);
 }
@@ -232,8 +230,8 @@ function main() {
     tomorrow = gettomorrowDateString();
     toastLog(today);
     dayover(); // 完工
-    toastLog("准备发布"+tomorrow);
-    release(); //发布
+    toastLog("准备发布" + tomorrow);
+    release(tomorrow); //发布
     console.warn("自动备份已学文章列表到/sdcard/Download!!!");
     console.hide();
     toastLog(" 退出！");
