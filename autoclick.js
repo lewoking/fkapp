@@ -13,6 +13,8 @@ h1 = h / 114 * 23;  //第一行460
 h2 = h / 228 * 65;//  第二行650
 h3 = h / 19 * 18;//底部首页2165
 y1 = h / 19 * 11; //1310 待办1
+x4 = w / 18 * 13;// 780
+y2 = h / 57 * 8;// 320
 msg = 0;//默认为时间触发 今明联动    tasker中可设置短信触发及激活取消时间触发项
 /********************************************全局变量***********************************************/
 
@@ -32,8 +34,6 @@ function delay(seconds) {
  */
 function release(tomorrow) {
     delay(1);
-    x4 = w / 18 * 13;// 780
-    y2 = h / 57 * 8;// 320
     while (textContains("我的工作").findone);
     click(x3, h3);// 我的工作
     delay(2);
@@ -105,9 +105,10 @@ function release(tomorrow) {
             swipe(x3, h3, x3, y2, 500);
             delay(0);
             sub = id("subBtn").findOne().bounds();
-            click(sub.centerX(), sub.centerY());//提交按钮 
+            if (click(sub.centerX(), sub.centerY())) {//提交按钮 
+                toastLog("task end");
+            }
         }
-        toastLog("task end");
         back(); //返回主页
         click(x1, h3);
     }
