@@ -49,7 +49,7 @@ function release(tomorrow) {
 
     }
     toastLog("load");
-    if (text("改期").findOne()) {
+    if (text("改期").findOne(1000)) {
         toastLog("find task");
         delay(2);
         tom = textContains(tomorrow).findOne().parent().bounds();
@@ -108,10 +108,13 @@ function release(tomorrow) {
             if (click(sub.centerX(), sub.centerY())) {//提交按钮 
                 toastLog("task end");
             }
-        }
+        }}
+        else{
+            toastLog("无计划");
+            }
         back(); //返回主页
         click(x1, h3);
-    }
+    
 }
 
 /**
